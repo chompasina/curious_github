@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CuriousGithub</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <%= render partial: "layouts/navbar" %>
+    <div class="main col-md-12">
+        <% flash.each do |type, msg| %>
+          <%= content_tag :div, msg, class: "top-navbar flash-#{type}" %>
+          <br>
+        <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>

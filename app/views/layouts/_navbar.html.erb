@@ -1,0 +1,13 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-header">  
+    <div class="container-fluid">
+      
+    <% if current_user %>
+      <h2> Welcome <%= current_user.uid %>!</h2> 
+      <%= link_to "Logout", logout_path, method: :delete %>
+    <% else %>
+      <%= link_to "Login with Github", login_path %>
+    <% end %>
+    </div>
+  </nav>
+  
+  

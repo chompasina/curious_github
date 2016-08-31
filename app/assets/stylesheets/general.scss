@@ -1,0 +1,11 @@
+@import "variables";
+
+body {
+  color: $primary-color;
+  font-family: $font-stack;
+  margin-top: 100px;
+}
+
+.navbar {
+  color: orange;
+}
