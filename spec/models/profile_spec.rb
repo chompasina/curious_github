@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Profile do
   it "works" do
     expect(Profile).to be_truthy
-    #legislator class exists
   end
   
   it "has attributes" do 

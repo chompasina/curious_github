@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'vcr'
+require 'webmock'
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/vcr_cassettes"
@@ -27,7 +28,9 @@ def stub_omniauth
      uid: "15034459",
      info: {
        nickname: "chompasina",
-       name: "Tommasina"
+       name: "Tommasina",
+       email: "tom@gmail.com",
+       image: "https://avatars.githubusercontent.com/u/15034459?v=3"
     },
    credentials: {
      token: ENV['ACCESS_TOKEN']
@@ -45,20 +48,10 @@ def stub_omniauth
    expect(page.status_code).to eq(200)
    click_button "Sign in with Github"
  end
-# Add additional requires below this line. Rails is not loaded until this point!
-
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-#
-# The following line is provided for convenience purposes. It has the downside
-# of increasing the boot-up time by auto-requiring all files in the support
-# directory. Alternatively, in the individual `*_spec.rb` files, manually
-# require only the support files necessary.
+ 
+ def create_user
+   User.create(provider: "github", uid: "15034459" , nickname: "chomasina", email: "tom@gmail.com", name: "Tommasina", image: "https://avatars.githubusercontent.com/u/15034459?v=3", token: ENV['ACCESS_TOKEN'] )
+ end
 #
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
