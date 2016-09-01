@@ -19,6 +19,32 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+def stub_omniauth
+  OmniAuth.config.test_mode = true
+   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+     provider: 'github',
+     uid: "15034459",
+     info: {
+       nickname: "chompasina",
+       name: "Tommasina"
+    },
+   credentials: {
+     token: ENV['ACCESS_TOKEN']
+   },
+   extra: {
+     raw_info: {
+       avatar_url: 'https://avatars.githubusercontent.com/u/15034459?v=3'
+     }
+   }
+   })
+ end
+ 
+ def login_user
+   visit '/'
+   expect(page.status_code).to eq(200)
+   click_button "Sign in with Github"
+ end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

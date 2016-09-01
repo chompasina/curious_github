@@ -7,6 +7,7 @@ describe GithubService do
         current_user = User.create!(uid: "15034459", provider: "github",
         token: ENV['ACCESS_TOKEN'])
         user_hash = GithubService.new(current_user).user_info
+        # require "pry"; binding.pry
         user_name = user_hash[:name]
         user_nickname = user_hash[:login]
         # byebug #to see what the hash is for the user_info spec test by running user_info

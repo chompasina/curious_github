@@ -2,10 +2,10 @@
     <div class="container-fluid">
       
     <% if current_user %>
-      <h2> Welcome <%= current_user.uid %>!</h2> 
+      <h2> Welcome <%= current_user.name %> !</h2> 
       <%= link_to "Logout", logout_path, method: :delete %>
     <% else %>
-      <%= link_to "Login with Github", login_path %>
+      <%= button_to "Sign in with Github", login_path %>
     <% end %>
     </div>
   </nav>
