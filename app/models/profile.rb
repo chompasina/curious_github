@@ -11,7 +11,7 @@ class Profile
   # end
   
   def self.all_info(params)
-    GithubService.new(current_user).user_info(params).map do |raw_user_data|
+    GithubService.new(current_user).user_info.map do |raw_user_data|
       require "pry"; binding.pry
       Profile.new(raw_user_data)
     end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User can login", type: :feature do
+RSpec.describe "User can login", type: :feature, vcr: true do
   
   before do
     stub_omniauth
@@ -8,7 +8,7 @@ RSpec.describe "User can login", type: :feature do
   end
 
   scenario "user logs in with Github" do
-    expect(current_path).to eq('/')
+    expect(current_path).to eq('/dashboard')
     expect(page).to have_content("Tommasina")
     expect(page).to have_content("Logout")
     expect(page).to_not have_button("Sign in with Github")

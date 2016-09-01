@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views starred repos", type: :feature do
+describe "User views starred repos", type: :feature, vcr: true do
   
   before do
     stub_omniauth
@@ -11,10 +11,8 @@ describe "User views starred repos", type: :feature do
 
 
   it 'can view starred repos' do
-    VCR.use_cassette("starred_repos") do
-      stars = @user.starred_repos
-      expect(stars.first[:name]).to eq("salary")
-      expect(stars.count).to eq(4)
-    end
+    stars = @user.starred_repos
+    expect(stars.first[:name]).to eq("salary")
+    expect(stars.count).to eq(4)
   end
 end

@@ -12,6 +12,7 @@ require 'webmock'
 VCR.configure do |config|
   config.cassette_library_dir = "spec/vcr_cassettes"
   config.hook_into :webmock 
+  config.configure_rspec_metadata!
 end
 
 Shoulda::Matchers.configure do |config|
@@ -44,7 +45,7 @@ def stub_omniauth
  end
  
  def login_user
-   visit '/'
+   visit root_path
    expect(page.status_code).to eq(200)
    click_button "Sign in with Github"
  end
@@ -61,27 +62,31 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  
+  
+  config.include Capybara::DSL
+  
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
+  # config.before(:suite) do
+  #   DatabaseCleaner.clean_with(:truncation)
+  # end
+  # 
+  # config.before(:each) do
+  #   DatabaseCleaner.strategy = :transaction
+  # end
+  # 
+  # config.before(:each, :js => true) do
+  #   DatabaseCleaner.strategy = :truncation
+  # end
+  # 
+  # config.before(:each) do
+  #   DatabaseCleaner.start
+  # end
+  # 
+  # config.after(:each) do
+  #   DatabaseCleaner.clean
+  # end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

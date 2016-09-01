@@ -4,6 +4,6 @@ class UsersController < ApplicationController
     @starred_repos = user.starred_repos
     @followers = user.followers
     @followings = user.followings
-    @recent_commits = user.recent_commits
+    @recent_activities = user.recent_activities
   end
 end

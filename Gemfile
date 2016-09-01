@@ -21,6 +21,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
   gem 'database_cleaner'
+  gem 'capybara'
 end
 
 group :test do
@@ -30,7 +31,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'database_cleaner'
   gem 'simplecov', require: false
 end
 
