@@ -50,7 +50,7 @@ def stub_omniauth
  end
  
  def create_user
-   User.create(provider: "github", uid: "15034459" , nickname: "chomasina", email: "tom@gmail.com", name: "Tommasina", image: "https://avatars.githubusercontent.com/u/15034459?v=3", token: ENV['ACCESS_TOKEN'] )
+   User.create(provider: "github", uid: "15034459" , nickname: "chompasina", email: "tom@gmail.com", name: "Tommasina", image: "https://avatars.githubusercontent.com/u/15034459?v=3", token: ENV['ACCESS_TOKEN'] )
  end
 #
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -63,6 +63,25 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

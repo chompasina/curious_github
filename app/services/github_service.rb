@@ -13,6 +13,18 @@ class GithubService
     parse(conn.get("users/#{@current_user.nickname}/starred"))
   end
   
+  def followers
+    parse(conn.get("users/#{@current_user.nickname}/followers"))
+  end
+  
+  def followings
+    parse(conn.get("users/#{@current_user.nickname}/following"))
+  end
+  
+  def recent_commits
+    
+  end
+  
   def user_info
     parse(conn.get("user")) #("users/#{current_user.nickname}")
   end

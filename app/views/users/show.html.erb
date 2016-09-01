@@ -1,3 +1,27 @@
 
 
 <%= image_tag current_user.image, class:"img-rounded" %>
+
+<h2>Your Starred Repositories</h2>
+  <% @starred_repos.each do |repo| %>
+    <ul>
+      <li><%= link_to repo[:name], "https://github.com/#{repo[:owner][:login]}/#{repo[:name]}"%></li>
+    </ul>
+  <% end %>
+  
+<h2>Your Followers</h2>
+  <% @followers.each do |follower| %>
+    <ul>
+      <li><%= link_to follower[:login], "https://github.com/#{follower[:login]}"%></li>
+    </ul>
+  <% end %>
+  
+<h2>You are following:</h2>
+<% @followings.each do |following| %>
+  <ul>
+    <li><%= link_to following[:login], "https://github.com/#{following[:login]}"%></li>
+  </ul>
+<% end %>
+
+<h2>Your recent commits</h2>
+
